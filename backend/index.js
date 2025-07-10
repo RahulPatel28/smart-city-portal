@@ -12,13 +12,27 @@ import complaintRouter from "./src/routes/complaint.routes.js"
 
 dotenv.config();
 const app = express();
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true,
-    allowedHeaders: 'Content-Type, Authorization',
-  })
-);
+const cors = require("cors");
+
+// ✅ Allow both local and deployed frontend
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://smart-city-portal-frontend.onrender.com"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+
 
 app.use(cookieParser());
 app.use(express.json());

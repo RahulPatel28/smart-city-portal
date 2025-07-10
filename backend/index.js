@@ -12,7 +12,6 @@ import complaintRouter from "./src/routes/complaint.routes.js"
 
 dotenv.config();
 const app = express();
-const cors = require("cors");
 
 app.use(
   cors({

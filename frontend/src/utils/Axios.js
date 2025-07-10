@@ -7,7 +7,7 @@ const getToken = () => {
 };
 
 const Axios = axios.create({
-  baseURL: "http://localhost:3000", 
+  baseURL: "https://smart-city-portal-backend.onrender.com", 
   withCredentials: true,// ✅ Updated base URL
   headers: {
     "Content-Type": "application/json",
